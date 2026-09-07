@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Article Read",
+  "description": "在 Chrome PDF 阅读器旁进行论文问答、外部知识检索与学习总结。",
+  "version": "0.1.0",
+  "permissions": ["sidePanel", "contextMenus", "storage", "activeTab", "tabs"],
+  "optional_host_permissions": ["https://*/*", "http://*/*", "file:///*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "打开 Article Read" },
+  "side_panel": { "default_path": "sidepanel.html" }
+}

@@ -1,0 +1,58 @@
+.side-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-body {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+.empty-chat {
+  padding: 28px 22px 20px;
+}
+
+.empty-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.empty-chat h2 {
+  margin: 10px 0 5px;
+}
+
+.empty-chat p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.composer-wrap {
+  flex: none;
+  height: auto;
+  padding: 0 16px 24px;
+}
+
+.composer {
+  height: auto;
+  min-height: 0;
+  padding: 14px;
+}
+
+.composer-wrap.with-citation .composer {
+  min-height: 0;
+}
+
+.composer textarea {
+  height: 46px;
+  padding: 17px 2px 5px;
+  line-height: 20px;
+}
+
+.composer-wrap.with-citation textarea {
+  padding-top: 17px;
+}
+
+.composer-divider {
+  margin-bottom: 12px;
+}

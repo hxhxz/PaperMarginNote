@@ -1,0 +1,20 @@
+import { useEffect, useState } from 'react';
+import { Check, Download, PenLine, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { loadKnowledge, makeVersion, saveKnowledge } from '../shared/storage';
+import type { KnowledgeRecord, KnowledgeVersion } from '../shared/types';
+
+const formatDate=(time:number)=>new Intl.DateTimeFormat('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(time);
+
+export function KnowledgeApp(){
+  const params=new URLSearchParams(location.search);const paperId=params.get('paperId')||'unknown';const paperTitle=params.get('title')||'未命名论文';const [record,setRecord]=useState<KnowledgeRecord>();const [selected,setSelected]=useState<KnowledgeVersion>();const [editing,setEditing]=useState(false);const [draft,setDraft]=useState('');const [saved,setSaved]=useState(true);
+  useEffect(()=>{loadKnowledge(paperId,paperTitle).then(r=>{setRecord(r);setDraft(r.markdown);setSelected(r.versions[0]);})},[paperId,paperTitle]);
+  useEffect(()=>{if(!record||!editing||saved)return;const timer=setTimeout(async()=>{const updated={...record,markdown:draft,updatedAt:Date.now()};setRecord(updated);await saveKnowledge(updated);setSaved(true)},700);return()=>clearTimeout(timer)},[draft,editing,record,saved]);
+  if(!record)return <div className="knowledge-loading">正在打开知识文档…</div>;
+  const currentRecord=record;
+  async function commitEdit(){if(!record)return;const updated=makeVersion(record,draft,'人工编辑：更新知识文档','manual');setRecord(updated);setSelected(updated.versions[0]);setEditing(false);setSaved(true);await saveKnowledge(updated);}
+  async function restore(version:KnowledgeVersion){if(!record)return;const updated=makeVersion(record,version.markdown,`恢复自 v${version.version}`,'restore');setRecord(updated);setDraft(updated.markdown);setSelected(updated.versions[0]);await saveKnowledge(updated);}
+  function download(){const blob=new Blob([currentRecord.markdown],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${currentRecord.title.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')}.md`;a.click();URL.revokeObjectURL(url);}
+  return <div className="knowledge-shell"><header className="knowledge-top"><div className="crumb">知识文档 / {record.title}</div><div className="top-actions"><span className="saved-pill"><Check size={16}/>{saved?'已自动保存':'保存中'}</span><button className="button edit" onClick={()=>editing?commitEdit():setEditing(true)}><PenLine size={16}/>{editing?'完成':'编辑'}</button><button className="button primary" onClick={download}><Download size={16}/>下载 .md</button></div></header><aside className="history"><h2>版本历史</h2>{record.versions.length===0&&<button className="version active"><strong>v1 · 当前</strong><span>初始知识文档</span></button>}{record.versions.map((v,index)=><button key={v.id} className={`version ${selected?.id===v.id?'active':''}`} onClick={()=>setSelected(v)}><strong>v{v.version}{index===0?' · 当前':''}</strong><span>{formatDate(v.createdAt)} · {v.source==='manual'?'人工编辑':'自动合并'}</span></button>)}<div className="history-actions"><button className="button">查看差异</button><button className="button" disabled={!selected} onClick={()=>selected&&restore(selected)}>恢复版本</button></div></aside><main className="document-pane">{record.versions[0]&&<section className="update-card"><div><Sparkles size={17}/><strong>本次更新</strong></div><span>{formatDate(record.versions[0].createdAt)} · {record.versions[0].source==='manual'?'人工编辑':'自动合并'}</span><hr/><p>{record.versions[0].summary}</p></section>}{editing?<textarea className="markdown-editor" value={draft} onChange={e=>{setDraft(e.target.value);setSaved(false)}}/>:<article className="markdown-body"><ReactMarkdown remarkPlugins={[remarkGfm]} components={{a:({node:_,...props})=><a {...props} target="_blank" rel="noreferrer"/>}}>{record.markdown}</ReactMarkdown><section className="protected"><span>人工编辑 · 已保护</span><strong>人工补充内容不会被模型静默删除。</strong></section></article>}</main></div>;
+}

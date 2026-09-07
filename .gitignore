@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output and release archives
+dist/
+*.zip
+
+# TypeScript cache and generated config output
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,41 @@
+.paper-status {
+  flex: none;
+  margin: 0 18px 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.paper-status.ready {
+  color: var(--green);
+}
+
+.paper-status.error {
+  color: var(--amber);
+}
+
+.evidence-chip.model {
+  background: #eef1f2;
+  color: #596b72;
+}
+
+.evidence-chip.external {
+  background: #edf0fa;
+  color: #54659a;
+}
+
+.source-item + .source-item {
+  margin-top: 6px;
+}
+
+.source-excerpt {
+  margin: 0;
+  border-radius: 0 0 8px 8px;
+  background: #f4f7f5;
+  padding: 10px 12px;
+  color: #53666e;
+  font-size: 11px;
+  line-height: 1.55;
+  max-height: 150px;
+  overflow-y: auto;
+}

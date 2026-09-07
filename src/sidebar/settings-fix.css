@@ -1,0 +1,26 @@
+.settings-view main {
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  padding-bottom: 36px;
+}
+
+.settings-view label {
+  margin-top: 20px;
+}
+
+.connection {
+  margin-top: 28px;
+  min-height: 58px;
+  height: auto;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.connection span {
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.settings-actions {
+  margin-top: 20px;
+}
