@@ -1,9 +1,8 @@
 # Dependencies
 node_modules/
 
-# Build output and release archives
+# Build output
 dist/
-*.zip
 
 # TypeScript cache and generated config output
 *.tsbuildinfo

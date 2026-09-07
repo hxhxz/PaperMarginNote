@@ -17,9 +17,9 @@ PaperMarginNote 是一款运行在 Chrome 原生 PDF 阅读器旁的论文阅读
 
 下载最新的可安装版本：
 
-[PaperMarginNote-v0.1.0.zip](https://github.com/hxhxz/PaperMarginNote/releases/latest/download/PaperMarginNote-v0.1.0.zip)
+[PaperMarginNote-v0.1.0.zip](https://github.com/hxhxz/PaperMarginNote/raw/main/PaperMarginNote-v0.1.0.zip)
 
-下载后解压，在 Chrome 扩展管理页面中加载解压后的目录即可。Release 发布前，也可以按照下方步骤从源码构建。
+下载后解压，在 Chrome 扩展管理页面中加载解压后的目录即可，也可以按照下方步骤从源码构建。
 
 ## 安装扩展
 
