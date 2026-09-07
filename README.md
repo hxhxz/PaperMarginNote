@@ -2,6 +2,28 @@
 
 PaperMarginNote 是一款运行在 Chrome 原生 PDF 阅读器旁的论文阅读辅助扩展。它不会替换浏览器内置的 PDF 阅读体验，而是通过 Side Panel 提供论文问答、选文翻译、引用追踪、外部知识检索，以及可持续维护的 Markdown 学习笔记。
 
+## 产品预览
+
+### 论文问答与原文引用
+
+在 Chrome 原生 PDF 阅读器旁直接提问，并将选中的论文原文作为可追溯的引用加入对话。
+
+![PaperMarginNote 论文问答与原文引用](images/PaperMarginNote.png)
+
+### 知识文档与 Markdown 导出
+
+结束学习后，将对话中的理解、结论和问题整理为支持编辑、版本恢复与下载的知识文档。
+
+![PaperMarginNote 知识文档与 Markdown 导出](images/export-markdown.png)
+
+### 模型 API 配置
+
+支持 OpenAI 及 OpenAI 兼容接口，API Key 仅保存在当前浏览器中。
+
+<p align="center">
+  <img src="images/settings.png" alt="PaperMarginNote 模型 API 配置" width="420">
+</p>
+
 ## 功能特性
 
 - 在 Chrome PDF 阅读器旁打开约 400px 宽的论文问答侧边栏。
